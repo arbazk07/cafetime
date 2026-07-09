@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Time — Bakery · Bar · Café · Grill, Hasilpur</title>
+<meta name="description" content="Cafe Time — Hasilpur's all-day bakery, bar, café and grill in Royal Smart City. Steaks, boba, matcha, wraps and more. Dine-in or order on WhatsApp.">
+<meta property="og:title" content="Cafe Time — Hasilpur">
+<meta property="og:description" content="Bakery, bar, café and grill in Royal Smart City, Hasilpur. Order on WhatsApp or dine in.">
+<meta property="og:type" content="restaurant.restaurant">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void: #120e0a;
+    --void-2: #1a140e;
+    --void-3: #221a12;
+    --linen: #ece2ce;
+    --linen-dim: #a99a80;
+    --gold: #c9a15a;
+    --gold-2: #e0bd80;
+    --copper: #a85c3a;
+    --wine: #6e2a24;
+    --line: rgba(236,226,206,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);color:var(--linen);font-family:'Work Sans', sans-serif;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--void);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .display{font-family:'Fraunces',serif;}
+  .mono{font-family:'Space Mono',monospace;}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+  section{padding:110px 5%;max-width:1360px;margin:0 auto;}
+  @media(max-width:850px){ section{padding:70px 6%;} }
+  @media(prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important;} }
+
+  .section-tag{display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold-2);margin-bottom:18px;}
+  .section-tag::before{content:'';width:18px;height:1px;background:var(--gold-2);}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(30px,4vw,46px);font-weight:600;line-height:1.14;}
+  .section-head p{margin-top:16px;font-size:16px;color:var(--linen-dim);max-width:520px;line-height:1.7;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 5%;transition:padding 0.3s,background 0.3s,border-color 0.3s;border-bottom:1px solid transparent;}
+  nav.scrolled{padding:10px 5%;background:rgba(18,14,10,0.88);backdrop-filter:blur(14px);border-bottom-color:var(--line);}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo img{height:38px;width:auto;border-radius:4px;}
+  .nav-links{display:flex;gap:32px;align-items:center;}
+  .nav-links a{font-size:14px;color:var(--linen-dim);transition:color 0.2s;}
+  .nav-links a:hover{color:var(--linen);}
+  .nav-cta{background:#25D366;color:#0b1a10!important;padding:11px 20px;border-radius:30px;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px;transition:transform 0.25s, box-shadow 0.25s;}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(37,211,102,0.35);}
+  @media(max-width:900px){.nav-links{display:none;}}
+  .burger{display:none;width:32px;height:22px;position:relative;cursor:pointer;background:none;border:none;z-index:120;}
+  .burger span{position:absolute;left:0;width:100%;height:1.5px;background:var(--linen);transition:transform 0.3s,opacity 0.2s,top 0.3s;}
+  .burger span:nth-child(1){top:0;} .burger span:nth-child(2){top:10px;} .burger span:nth-child(3){top:20px;}
+  .burger.open span:nth-child(1){top:10px;transform:rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){top:10px;transform:rotate(-135deg);}
+  @media(max-width:900px){.burger{display:block;} .nav-cta{display:none;}}
+  .mobile-menu{position:fixed;inset:0;z-index:110;background:var(--void);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;clip-path:circle(0px at calc(100% - 38px) 38px);transition:clip-path 0.55s cubic-bezier(.2,.8,.2,1);pointer-events:none;}
+  .mobile-menu.open{clip-path:circle(150% at calc(100% - 38px) 38px);pointer-events:auto;}
+  .mobile-menu a{font-family:'Fraunces',serif;font-size:28px;font-weight:600;}
+  .mobile-menu a.mobile-cta{font-family:'Space Mono',monospace;font-size:13px;background:#25D366;color:#0b1a10;padding:12px 26px;border-radius:30px;margin-top:6px;}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1.05fr 0.95fr;align-items:center;gap:50px;padding:150px 5% 60px;max-width:1360px;margin:0 auto;position:relative;}
+  .hero-copy .section-tag{margin-bottom:20px;}
+  .hero h1{font-size:clamp(40px,5.4vw,68px);font-weight:600;line-height:1.05;letter-spacing:-0.01em;}
+  .hero h1 em{font-style:normal;color:var(--gold-2);}
+  .hero-sub{margin-top:22px;font-size:17px;color:var(--linen-dim);max-width:470px;line-height:1.75;}
+  .hero-ctas{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+  .btn-whatsapp{background:#25D366;color:#0b1a10;padding:16px 28px;border-radius:30px;font-size:14.5px;font-weight:700;display:inline-flex;align-items:center;gap:9px;transition:transform 0.25s,box-shadow 0.25s;}
+  .btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(37,211,102,0.3);}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--linen);padding:14.5px 26px;border-radius:30px;font-size:14.5px;font-weight:600;transition:border-color 0.25s,background 0.25s;}
+  .btn-ghost:hover{border-color:var(--gold);background:rgba(201,161,90,0.08);}
+  .hero-trust{display:flex;align-items:center;gap:12px;margin-top:38px;flex-wrap:wrap;}
+  .stars{color:var(--gold-2);font-size:15px;letter-spacing:2px;}
+  .hero-trust .mono{font-size:12px;color:var(--linen-dim);}
+
+  .hero-visual{position:relative;height:560px;display:flex;align-items:center;justify-content:center;}
+  .phone-stack{position:relative;width:270px;height:520px;}
+  .phone{position:absolute;width:250px;height:500px;border-radius:32px;background:var(--void-2);border:5px solid var(--void-3);box-shadow:0 40px 80px rgba(0,0,0,0.55);overflow:hidden;}
+  .phone img{width:100%;height:100%;object-fit:cover;}
+  .phone-back{left:-30px;top:26px;transform:rotate(-9deg);opacity:0.7;filter:brightness(0.75);}
+  .phone-front{left:20px;top:0;transform:rotate(4deg);z-index:2;}
+  .phone-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:60px;height:14px;background:var(--void-3);border-radius:10px;z-index:3;}
+  .hero-badge{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:var(--void-2);border:1px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:0 20px 50px rgba(0,0,0,0.4);z-index:4;white-space:nowrap;}
+  .hero-badge .mono{font-size:10.5px;color:var(--gold-2);letter-spacing:0.05em;text-transform:uppercase;}
+  .hero-badge .hb-row{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:13px;font-weight:600;}
+  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#25D366;animation:pulse-dot 1.6s infinite;}
+  @keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:0.3;}}
+  @media(max-width:980px){.hero{grid-template-columns:1fr;padding:130px 6% 50px;text-align:center;} .hero-copy{display:flex;flex-direction:column;align-items:center;} .hero-visual{height:440px;} .hero-ctas{justify-content:center;} .hero-trust{justify-content:center;}}
+
+  /* QUICK INFO STRIP */
+  .info-strip{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .info-item{flex:1;min-width:220px;padding:24px 5%;border-right:1px solid var(--line);font-size:13px;color:var(--linen-dim);}
+  .info-item:last-child{border-right:none;}
+  .info-item b{display:block;font-family:'Fraunces',serif;font-size:16px;font-weight:600;color:var(--linen);margin-bottom:3px;}
+  .info-item a{color:var(--linen);}
+
+  /* MARQUEE */
+  .marquee-wrap{overflow:hidden;border-bottom:1px solid var(--line);padding:20px 0;background:var(--void-2);}
+  .marquee-track{display:flex;gap:44px;white-space:nowrap;animation:scroll-left 28s linear infinite;width:max-content;}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .marquee-track span{font-family:'Fraunces',serif;font-size:17px;font-weight:500;color:var(--gold-2);opacity:0.7;}
+
+  /* MENU TABS */
+  .menu-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+  .menu-tab{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.03em;padding:10px 16px;border-radius:30px;border:1px solid var(--line);color:var(--linen-dim);cursor:pointer;transition:all 0.25s;background:none;}
+  .menu-tab:hover{border-color:var(--gold);color:var(--linen);}
+  .menu-tab.active{background:var(--gold);border-color:var(--gold);color:var(--void);font-weight:600;}
+  .menu-panel{display:none;}
+  .menu-panel.active{display:block;}
+  .menu-panel-inner{display:grid;grid-template-columns:0.85fr 1.15fr;gap:40px;background:var(--void-2);border:1px solid var(--line);border-radius:16px;padding:30px;}
+  .menu-photo{border-radius:10px;overflow:hidden;max-height:640px;}
+  .menu-photo img{width:100%;height:100%;object-fit:cover;object-position:top;}
+  .menu-items h3{font-family:'Fraunces',serif;font-size:24px;font-weight:600;margin-bottom:4px;}
+  .menu-items .new-drop{display:inline-block;background:var(--wine);color:var(--linen);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:14px;}
+  .menu-items h4{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gold-2);margin:22px 0 10px;}
+  .menu-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px dotted var(--line);font-size:14.5px;gap:12px;}
+  .menu-row span:first-child{color:var(--linen);}
+  .menu-row .price{font-family:'Space Mono',monospace;color:var(--gold-2);white-space:nowrap;}
+  .menu-order-btn{margin-top:24px;}
+  @media(max-width:850px){.menu-panel-inner{grid-template-columns:1fr;} .menu-photo{max-height:420px;}}
+
+  /* STATS */
+  .stats-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats-band{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;padding:60px 5%;max-width:1360px;margin:0 auto;}
+  .stat b{display:block;font-family:'Fraunces',serif;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--gold-2);}
+  .stat span{font-size:12.5px;color:var(--linen-dim);}
+  @media(max-width:700px){.stats-band{grid-template-columns:1fr 1fr;}}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .testi-card{background:var(--void-2);border:1px solid var(--line);border-radius:14px;padding:28px;}
+  .testi-card .stars{display:block;margin-bottom:14px;}
+  .testi-card p{font-size:14.5px;line-height:1.75;margin-bottom:18px;}
+  .testi-who{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:14px;font-size:12.5px;color:var(--linen-dim);}
+  .testi-name{font-weight:700;color:var(--linen);}
+  @media(max-width:850px){.testi-grid{grid-template-columns:1fr;}}
+
+  /* LOCATION */
+  .location-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;}
+  .location-map{border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:340px;}
+  .location-map iframe{width:100%;height:100%;min-height:340px;border:0;filter:grayscale(0.3) invert(0.92) contrast(0.9);}
+  .location-details{background:var(--void-2);border:1px solid var(--line);border-radius:14px;padding:32px;display:flex;flex-direction:column;justify-content:center;}
+  .location-row{display:flex;gap:14px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px dotted var(--line);}
+  .location-row:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .location-row .li-label{font-family:'Space Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold-2);min-width:90px;}
+  .location-row .li-value{font-size:14.5px;}
+  .location-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+  @media(max-width:900px){.location-grid{grid-template-columns:1fr;}}
+
+  /* STICKY MOBILE CTA */
+  .sticky-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;padding:14px 5%;background:rgba(18,14,10,0.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);align-items:center;justify-content:space-between;gap:14px;transform:translateY(100%);transition:transform 0.35s ease;}
+  .sticky-cta.show{transform:translateY(0);}
+  .sticky-cta .sc-text b{display:block;font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--gold-2);}
+  .sticky-cta .sc-text{font-size:11.5px;color:var(--linen-dim);}
+  @media(max-width:900px){.sticky-cta{display:flex;}}
+
+  footer{padding:56px 5% 36px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px;font-size:13px;color:var(--linen-dim);max-width:1360px;margin:0 auto;}
+  footer .f-logo{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  footer .f-logo img{height:30px;}
+  footer .f-col h4{font-family:'Space Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--linen);margin-bottom:12px;}
+  footer .f-col a,footer .f-col div{display:block;margin-bottom:8px;}
+  footer .f-col a:hover{color:var(--gold-2);}
+  .f-demo{width:100%;text-align:center;padding-top:26px;margin-top:10px;border-top:1px solid var(--line);font-size:11.5px;opacity:0.6;}
+</style>
+</head>
+<body>
+
+<nav id="siteNav">
+  <div class="logo"><img src="assets/logo.jpeg" alt="Cafe Time logo"></div>
+  <div class="nav-links">
+    <a href="#menu">Menu</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#location">Location</a>
+  </div>
+  <a href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20place%20an%20order%20from%20Cafe%20Time." class="nav-cta" target="_blank" rel="noopener">Order on WhatsApp</a>
+  <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#menu">Menu</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#location">Location</a>
+  <a href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20place%20an%20order%20from%20Cafe%20Time." class="mobile-cta" target="_blank" rel="noopener">Order on WhatsApp</a>
+</div>
+
+<div class="hero">
+  <div class="hero-copy reveal">
+    <div class="section-tag">Royal Smart City &middot; Hasilpur</div>
+    <h1 class="display">Hasilpur's all-day<br><em>hangout.</em></h1>
+    <p class="hero-sub">Bakery, bar, cafe, and grill under one roof. Steaks, boba, matcha, wraps, and everything in between — dine in, or have it delivered to your door.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20place%20an%20order%20from%20Cafe%20Time." class="btn-whatsapp" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0012.04 2zm5.8 14.09c-.24.68-1.42 1.3-1.96 1.38-.5.08-1.13.11-1.83-.11-.42-.14-.96-.31-1.65-.61-2.91-1.26-4.81-4.18-4.96-4.37-.15-.2-1.19-1.58-1.19-3.02 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.81 2.01.88 2.15.07.15.12.32.02.52-.1.2-.15.32-.29.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.26 1.64 2.04 1.12.99 2.06 1.31 2.36 1.45.3.15.47.12.65-.07.17-.19.73-.85.93-1.14.19-.29.39-.24.65-.14.27.1 1.69.8 1.98.94.29.15.48.22.55.34.07.13.07.75-.17 1.43z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a href="#menu" class="btn-ghost">See Full Menu</a>
+    </div>
+    <div class="hero-trust">
+      <span class="stars">★★★★★</span>
+      <span class="mono">4.8 &middot; 60+ happy customers</span>
+    </div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="phone-stack">
+      <div class="phone phone-back"><img src="assets/photo-3.jpeg" alt="Cafe Time steaks menu"></div>
+      <div class="phone phone-front">
+        <div class="phone-notch"></div>
+        <img src="assets/photo-1.jpeg" alt="Cafe Time desserts menu">
+      </div>
+      <div class="hero-badge">
+        <div class="mono">Cafe Time &middot; Royal Smart City</div>
+        <div class="hb-row"><span class="dot"></span>Open now &middot; closes 12 AM</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="info-strip">
+  <div class="info-item"><b>Royal Smart City</b>Street No. 1, Hasilpur, 63000</div>
+  <div class="info-item"><b>Open Daily</b>12:00 PM &ndash; 12:00 AM</div>
+  <div class="info-item"><b><a href="tel:+923330787777">+92 333 0787777</a></b>Call or WhatsApp</div>
+  <div class="info-item"><b>Rs 1 &ndash; 3,000</b>Approx. per person</div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Steaks</span><span>&middot;</span><span>Boba &amp; Bubble Tea</span><span>&middot;</span><span>Matcha</span><span>&middot;</span><span>Wraps &amp; Shawarma</span><span>&middot;</span><span>Fresh Pastries</span><span>&middot;</span><span>Wood-Fired Grill</span><span>&middot;</span>
+    <span>Steaks</span><span>&middot;</span><span>Boba &amp; Bubble Tea</span><span>&middot;</span><span>Matcha</span><span>&middot;</span><span>Wraps &amp; Shawarma</span><span>&middot;</span><span>Fresh Pastries</span><span>&middot;</span><span>Wood-Fired Grill</span><span>&middot;</span>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="section-head reveal">
+    <div class="section-tag">The Full Menu</div>
+    <h2 class="display">Thirteen categories.<br>Something for everyone.</h2>
+    <p>From loaded fries to tarragon steak, hot espresso to frozen matcha. Tap a category to browse.</p>
+  </div>
+
+  <div class="menu-tabs reveal" id="menuTabs">
+    <button class="menu-tab active" data-panel="appetizers">Appetizers</button>
+    <button class="menu-tab" data-panel="sandwiches">Sandwiches</button>
+    <button class="menu-tab" data-panel="wraps">Wraps</button>
+    <button class="menu-tab" data-panel="saladpasta">Salads &amp; Pasta</button>
+    <button class="menu-tab" data-panel="premium">Premium Dishes</button>
+    <button class="menu-tab" data-panel="steaks">Steaks</button>
+    <button class="menu-tab" data-panel="desserts">Desserts &amp; Ice Cream</button>
+    <button class="menu-tab" data-panel="sodas">Sodas &amp; Chillers</button>
+    <button class="menu-tab" data-panel="boba">Bubble Tea &amp; Boba</button>
+    <button class="menu-tab" data-panel="matcha">Matcha</button>
+    <button class="menu-tab" data-panel="icedcoffee">Iced Coffee</button>
+    <button class="menu-tab" data-panel="hotdrinks">Hot Beverages</button>
+    <button class="menu-tab" data-panel="frappe">Nescafe &amp; Frappe</button>
+  </div>
+
+  <div class="menu-panel active" id="panel-appetizers">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-13.jpeg" alt="Cafe Time appetizers menu"></div>
+      <div class="menu-items">
+        <h3>Appetizers</h3>
+        <div class="menu-row"><span>Plain Fries</span><span class="price">Rs 300</span></div>
+        <div class="menu-row"><span>Masala Fries</span><span class="price">Rs 300</span></div>
+        <div class="menu-row"><span>Mayo Fries</span><span class="price">Rs 350</span></div>
+        <div class="menu-row"><span>Onion Rings (10 pcs)</span><span class="price">Rs 400</span></div>
+        <div class="menu-row"><span>Loaded Fries</span><span class="price">Rs 650</span></div>
+        <div class="menu-row"><span>Honey Wings (6 pcs)</span><span class="price">Rs 650</span></div>
+        <div class="menu-row"><span>Oven Baked Wings (6 pcs)</span><span class="price">Rs 650</span></div>
+        <div class="menu-row"><span>Chicken Dynamite</span><span class="price">Rs 1,350</span></div>
+        <div class="menu-row"><span>Finger Fish (6 pcs)</span><span class="price">Rs 1,800</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Appetizers%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-sandwiches">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-4.jpeg" alt="Cafe Time sandwiches menu"></div>
+      <div class="menu-items">
+        <h3>Sandwiches</h3>
+        <div class="menu-row"><span>Cold Sandwich</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Chicken Cheese Sandwich</span><span class="price">Rs 540</span></div>
+        <div class="menu-row"><span>Club Sandwich</span><span class="price">Rs 750</span></div>
+        <div class="menu-row"><span>Italian Sandwich</span><span class="price">Rs 720</span></div>
+        <div class="menu-row"><span>Cuban Chicken Sandwich</span><span class="price">Rs 800</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Sandwiches%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-wraps">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-5.jpeg" alt="Cafe Time wraps menu"></div>
+      <div class="menu-items">
+        <h3>Wraps</h3>
+        <div class="menu-row"><span>Arabian Shawarma</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Chunky Wraps</span><span class="price">Rs 580</span></div>
+        <div class="menu-row"><span>Grill Wrap</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Cafe Time Special Wrap</span><span class="price">Rs 720</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Wraps%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-saladpasta">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-6.jpeg" alt="Cafe Time salads and pasta menu"></div>
+      <div class="menu-items">
+        <h3>Salads &amp; Pasta</h3>
+        <div class="menu-row"><span>Ceaser Salad</span><span class="price">Rs 799</span></div>
+        <div class="menu-row"><span>Greek Salad</span><span class="price">Rs 799</span></div>
+        <div class="menu-row"><span>Fettuccine Alfredo Pasta</span><span class="price">Rs 1,400</span></div>
+        <div class="menu-row"><span>Penne Pasta</span><span class="price">Rs 1,400</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Salads%20%26%20Pasta%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-premium">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-2.jpeg" alt="Cafe Time premium dishes menu"></div>
+      <div class="menu-items">
+        <h3>Premium Dishes</h3>
+        <div class="menu-row"><span>Chicken Chilli Dry</span><span class="price">Rs 1,350</span></div>
+        <div class="menu-row"><span>Honey Mustard Chicken</span><span class="price">Rs 1,500</span></div>
+        <div class="menu-row"><span>Moroccan Chicken</span><span class="price">Rs 1,500</span></div>
+        <div class="menu-row"><span>Stuffed Chicken</span><span class="price">Rs 1,750</span></div>
+        <div class="menu-row"><span>Polo Chicken</span><span class="price">Rs 1,750</span></div>
+        <div class="menu-row"><span>Chicken Parmesan</span><span class="price">Rs 1,750</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Premium%20Dishes%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-steaks">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-3.jpeg" alt="Cafe Time steaks menu"></div>
+      <div class="menu-items">
+        <h3>Steaks</h3>
+        <div class="menu-row"><span>Black Pepper Steak</span><span class="price">Rs 1,450</span></div>
+        <div class="menu-row"><span>Mushroom Steak</span><span class="price">Rs 1,450</span></div>
+        <div class="menu-row"><span>Tarragon Steak</span><span class="price">Rs 1,450</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Steaks%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-desserts">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-1.jpeg" alt="Cafe Time desserts and ice cream menu"></div>
+      <div class="menu-items">
+        <h3>Desserts</h3>
+        <div class="menu-row"><span>Red Velvet Pastry</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Chocolate Fudge Pastry</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Lotus Pastry</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Molten Lava</span><span class="price">Rs 550</span></div>
+        <h4>Ice Cream (Single / Double Scoop)</h4>
+        <div class="menu-row"><span>Chocolate Chip</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Chocolate</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Coffee</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Mango</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Pistachio</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Praline</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Strawberry</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Tutti Fruity</span><span class="price">Rs 160 / 300</span></div>
+        <div class="menu-row"><span>Kulfa</span><span class="price">Rs 160 / 300</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Desserts%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-sodas">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-7.jpeg" alt="Cafe Time sodas and chillers menu"></div>
+      <div class="menu-items">
+        <h3>Sodas, Chillers &amp; Refreshers</h3>
+        <h4>Sodas</h4>
+        <div class="menu-row"><span>Mango / Strawberry / Lemon / Peach / Blueberry Soda</span><span class="price">Rs 390</span></div>
+        <h4>Chillers</h4>
+        <div class="menu-row"><span>Mango / Strawberry / Raspberry / Blueberry Chiller</span><span class="price">Rs 420</span></div>
+        <h4>Refreshers</h4>
+        <div class="menu-row"><span>Mint Margarita</span><span class="price">Rs 400</span></div>
+        <div class="menu-row"><span>Peach Iced Tea</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Pina Colada</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Mango Margarita</span><span class="price">Rs 450</span></div>
+        <div class="menu-row"><span>Strawberry Colada</span><span class="price">Rs 450</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Sodas%20%26%20Chillers%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-boba">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-8.jpeg" alt="Cafe Time bubble tea and boba coffee menu"></div>
+      <div class="menu-items">
+        <h3>Bubble Tea &amp; Boba Coffee</h3>
+        <span class="new-drop">New Drop</span>
+        <h4>Bubble Tea</h4>
+        <div class="menu-row"><span>Plain Bubble Tea</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Strawberry Bubble Tea</span><span class="price">Rs 670</span></div>
+        <div class="menu-row"><span>Mango Bubble Tea</span><span class="price">Rs 670</span></div>
+        <h4>Boba Coffee</h4>
+        <div class="menu-row"><span>Caramel Boba Coffee</span><span class="price">Rs 740</span></div>
+        <div class="menu-row"><span>Vanilla Boba Coffee</span><span class="price">Rs 740</span></div>
+        <div class="menu-row"><span>Hazelnut Boba Coffee</span><span class="price">Rs 740</span></div>
+        <div class="menu-row"><span>Plain Iced Latte Boba Coffee</span><span class="price">Rs 740</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Bubble%20Tea%20%26%20Boba%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-matcha">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-9.jpeg" alt="Cafe Time matcha menu"></div>
+      <div class="menu-items">
+        <h3>Matcha</h3>
+        <div class="menu-row"><span>Plain Matcha</span><span class="price">Rs 620</span></div>
+        <div class="menu-row"><span>Hot Matcha</span><span class="price">Rs 640</span></div>
+        <div class="menu-row"><span>Vanilla Matcha</span><span class="price">Rs 680</span></div>
+        <div class="menu-row"><span>Caramel Matcha</span><span class="price">Rs 680</span></div>
+        <div class="menu-row"><span>Strawberry Matcha</span><span class="price">Rs 710</span></div>
+        <div class="menu-row"><span>Mango Matcha</span><span class="price">Rs 710</span></div>
+        <div class="menu-row"><span>Frozen Matcha</span><span class="price">Rs 720</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Matcha%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-icedcoffee">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-10.jpeg" alt="Cafe Time iced coffee menu"></div>
+      <div class="menu-items">
+        <h3>Iced Coffee</h3>
+        <div class="menu-row"><span>Black Iced Coffee</span><span class="price">Rs 420</span></div>
+        <div class="menu-row"><span>Plain Ice Latte</span><span class="price">Rs 580</span></div>
+        <div class="menu-row"><span>Hazelnut Ice Latte</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Vanilla Ice Latte</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Caramel Ice Latte</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Mocha Ice Latte</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Spanish Ice Latte</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Honey Ice Coffee</span><span class="price">Rs 600</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Iced%20Coffee%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-hotdrinks">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-11.jpeg" alt="Cafe Time hot beverages menu"></div>
+      <div class="menu-items">
+        <h3>Hot Beverages</h3>
+        <div class="menu-row"><span>Espresso</span><span class="price">Rs 390</span></div>
+        <div class="menu-row"><span>Black Coffee</span><span class="price">Rs 390</span></div>
+        <div class="menu-row"><span>Flat White</span><span class="price">Rs 540</span></div>
+        <div class="menu-row"><span>Cappuccino</span><span class="price">Rs 580</span></div>
+        <div class="menu-row"><span>Latte</span><span class="price">Rs 600</span></div>
+        <div class="menu-row"><span>Vanilla Latte</span><span class="price">Rs 650</span></div>
+        <div class="menu-row"><span>Caramel Latte</span><span class="price">Rs 650</span></div>
+        <div class="menu-row"><span>Hazelnut Latte</span><span class="price">Rs 650</span></div>
+        <div class="menu-row"><span>Spanish Latte</span><span class="price">Rs 650</span></div>
+        <div class="menu-row"><span>Hot Chocolate</span><span class="price">Rs 640</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Hot%20Beverages%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-panel" id="panel-frappe">
+    <div class="menu-panel-inner reveal">
+      <div class="menu-photo"><img src="assets/photo-12.jpeg" alt="Cafe Time nescafe and frappe menu"></div>
+      <div class="menu-items">
+        <h3>Nescafe &amp; Frappe Cold</h3>
+        <h4>Nescafe</h4>
+        <div class="menu-row"><span>Espresso</span><span class="price">Rs 350</span></div>
+        <div class="menu-row"><span>Cappuccino</span><span class="price">Rs 350</span></div>
+        <div class="menu-row"><span>Latte</span><span class="price">Rs 350</span></div>
+        <div class="menu-row"><span>Karak Tea</span><span class="price">Rs 350</span></div>
+        <div class="menu-row"><span>Cardamom Tea</span><span class="price">Rs 350</span></div>
+        <h4>Frappe Cold</h4>
+        <div class="menu-row"><span>Yellow Vanilla Frappe</span><span class="price">Rs 700</span></div>
+        <div class="menu-row"><span>Caramel Frappe</span><span class="price">Rs 700</span></div>
+        <div class="menu-row"><span>Crunchy Mocha Frappe</span><span class="price">Rs 700</span></div>
+        <div class="menu-row"><span>Hazelnut Rock Frappe</span><span class="price">Rs 700</span></div>
+        <div class="menu-row"><span>Biscotti Frappe</span><span class="price">Rs 720</span></div>
+        <a class="btn-whatsapp menu-order-btn" target="_blank" rel="noopener" href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20order%20from%20the%20Nescafe%20%26%20Frappe%20menu%20at%20Cafe%20Time.">Order from this menu</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="stats-wrap"><div class="stats-band">
+  <div class="stat reveal"><b class="counter" data-target="13">0</b><span>Menu categories</span></div>
+  <div class="stat reveal"><b class="counter" data-target="70">0</b><span>Items on the menu</span></div>
+  <div class="stat reveal"><b class="counter-dec" data-target="4.8">0</b><span>Average rating</span></div>
+  <div class="stat reveal"><b class="counter" data-target="60">0</b><span>Happy customers so far</span></div>
+</div></div>
+
+<section id="reviews">
+  <div class="section-head reveal">
+    <div class="section-tag">What People Say</div>
+    <h2 class="display">Word around<br>Royal Smart City.</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <span class="stars">★★★★★</span>
+      <p>"The Tarragon Steak alone is worth the trip. Didn't expect steak this good in Hasilpur, honestly."</p>
+      <div class="testi-who"><span class="testi-name">Ahmed R.</span><span>Google Review</span></div>
+    </div>
+    <div class="testi-card reveal">
+      <span class="stars">★★★★★</span>
+      <p>"Their boba coffee is my daily order now. The Caramel Boba Coffee is dangerously good."</p>
+      <div class="testi-who"><span class="testi-name">Zainab M.</span><span>Google Review</span></div>
+    </div>
+    <div class="testi-card reveal">
+      <span class="stars">★★★★★</span>
+      <p>"Took the whole family for dinner. Kids loved the Chicken Chilli Dry, we loved the Molten Lava. Will be back."</p>
+      <div class="testi-who"><span class="testi-name">Usman T.</span><span>Google Review</span></div>
+    </div>
+    <div class="testi-card reveal">
+      <span class="stars">★★★★★</span>
+      <p>"Best dine-in spot in Royal Smart City. Cozy seating, quick service, and a matcha menu bigger than places in Lahore."</p>
+      <div class="testi-who"><span class="testi-name">Hira K.</span><span>Google Review</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="section-head reveal">
+    <div class="section-tag">Find Us</div>
+    <h2 class="display">Royal Smart City,<br>Hasilpur.</h2>
+  </div>
+  <div class="location-grid">
+    <div class="location-map reveal">
+      <iframe src="https://www.google.com/maps?q=MHM6%2BJ8+Hasilpur,+Pakistan&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="location-details reveal">
+      <div class="location-row"><span class="li-label">Address</span><span class="li-value">Smart, Street No. 1, Royal Smart City, Hasilpur, 63000, Pakistan</span></div>
+      <div class="location-row"><span class="li-label">Hours</span><span class="li-value">Open daily &middot; 12:00 PM &ndash; 12:00 AM</span></div>
+      <div class="location-row"><span class="li-label">Phone</span><span class="li-value"><a href="tel:+923330787777">+92 333 0787777</a></span></div>
+      <div class="location-row"><span class="li-label">Good for</span><span class="li-value">Dine-in, takeaway &amp; WhatsApp orders</span></div>
+      <div class="location-actions">
+        <a href="https://maps.app.goo.gl/roX1ZpPL1aXCsZQZA?g_st=iw" target="_blank" rel="noopener" class="btn-ghost">Get Directions</a>
+        <a href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20place%20an%20order%20from%20Cafe%20Time." target="_blank" rel="noopener" class="btn-whatsapp">Order on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="sc-text">Open now &middot; closes 12 AM<b>Order on WhatsApp</b></div>
+  <a href="https://wa.me/923330787777?text=Hi!%20I%27d%20like%20to%20place%20an%20order%20from%20Cafe%20Time." target="_blank" rel="noopener" class="btn-whatsapp" style="padding:12px 20px;">Order</a>
+</div>
+
+<footer>
+  <div>
+    <div class="f-logo"><img src="assets/logo.jpeg" alt="Cafe Time logo"></div>
+    <div style="max-width:240px;">Bakery &middot; Bar &middot; Cafe &middot; Grill, in the heart of Royal Smart City, Hasilpur.</div>
+  </div>
+  <div class="f-col">
+    <h4>Visit</h4>
+    <div>Street No. 1, Royal Smart City</div>
+    <div>Hasilpur, 63000</div>
+    <div><a href="tel:+923330787777">+92 333 0787777</a></div>
+  </div>
+  <div class="f-col">
+    <h4>Cafe Time</h4>
+    <a href="#menu">Menu</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#location">Location</a>
+  </div>
+  <div class="f-col">
+    <h4>Hours</h4>
+    <div>Open Daily</div>
+    <div>12:00 PM &ndash; 12:00 AM</div>
+  </div>
+  <div class="f-demo">Demo website built for Cafe Time &middot; not yet live</div>
+</footer>
+
+<script>
+  const navEl = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{ navEl.classList.toggle('scrolled', window.scrollY > 40); });
+
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burgerBtn.addEventListener('click', ()=>{
+    const isOpen = mobileMenu.classList.toggle('open');
+    burgerBtn.classList.toggle('open', isOpen);
+    burgerBtn.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{
+    mobileMenu.classList.remove('open'); burgerBtn.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', false); document.body.style.overflow = '';
+  }));
+
+  // menu tabs
+  const tabs = document.querySelectorAll('.menu-tab');
+  const panels = document.querySelectorAll('.menu-panel');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      tabs.forEach(t=>t.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+      tab.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    });
+  });
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+  // counters
+  const counters = document.querySelectorAll('.counter, .counter-dec');
+  const counterIo = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const el = en.target; const target = parseFloat(el.dataset.target); const isDec = el.classList.contains('counter-dec');
+        let cur = 0; const step = target / 50;
+        const t = setInterval(()=>{
+          cur += step;
+          if(cur >= target){ cur = target; clearInterval(t); }
+          el.textContent = isDec ? cur.toFixed(1) : Math.floor(cur).toLocaleString();
+        }, 20);
+        counterIo.unobserve(el);
+      }
+    });
+  }, {threshold:0.5});
+  counters.forEach(c=> counterIo.observe(c));
+
+  // sticky mobile cta
+  const stickyCta = document.getElementById('stickyCta');
+  window.addEventListener('scroll', ()=>{
+    stickyCta.classList.toggle('show', window.scrollY > window.innerHeight * 0.7);
+  });
+</script>
+
+</body>
+</html>
